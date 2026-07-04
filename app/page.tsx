@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { todayFortune, zodiacFortunes } from "@/data/fortune";
+import { getDailyFortune } from "@/data/fortune";
+
+export const dynamic = "force-dynamic";
 
 const navItems = [
   { href: "/", label: "오늘", icon: "✨" },
@@ -45,15 +47,16 @@ type HomeProps = {
 
 export default async function Home({ searchParams }: HomeProps) {
   const params = await searchParams;
-  const selectedId = params?.zodiac ?? zodiacFortunes[0].id;
-  const selected = zodiacFortunes.find((zodiac) => zodiac.id === selectedId) ?? zodiacFortunes[0];
+  const { today, zodiacs } = getDailyFortune();
+  const selectedId = params?.zodiac ?? zodiacs[0].id;
+  const selected = zodiacs.find((zodiac) => zodiac.id === selectedId) ?? zodiacs[0];
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-[430px] bg-lavender-50/80 px-5 pb-28 pt-5 shadow-soft sm:my-8 sm:rounded-[36px]">
       <header className="rounded-[32px] bg-gradient-to-br from-lavender-300 via-purple-200 to-pink-100 p-6 shadow-soft">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm font-bold text-lavender-600">{todayFortune.dateLabel}</p>
+            <p className="text-sm font-bold text-lavender-600">{today.dateLabel}</p>
             <h1 className="mt-2 text-4xl font-black leading-tight text-[#2d2541]">
               오늘의
               <br />
@@ -65,7 +68,7 @@ export default async function Home({ searchParams }: HomeProps) {
           </div>
         </div>
         <p className="mt-6 rounded-[24px] bg-white/70 p-4 text-lg font-bold leading-relaxed text-[#493a63]">
-          {todayFortune.headline}
+          {today.headline}
         </p>
       </header>
 
@@ -81,7 +84,7 @@ export default async function Home({ searchParams }: HomeProps) {
           </span>
         </div>
         <div className="mt-4 grid grid-cols-2 gap-3">
-          {todayFortune.scores.map((score) => (
+          {today.scores.map((score) => (
             <ScoreRing key={score.label} {...score} />
           ))}
         </div>
@@ -90,7 +93,7 @@ export default async function Home({ searchParams }: HomeProps) {
       <section id="zodiac" className="mt-8">
         <h2 className="text-2xl font-black text-[#2d2541]">12띠별 운세</h2>
         <div className="mt-4 grid grid-cols-3 gap-3">
-          {zodiacFortunes.map((zodiac) => {
+          {zodiacs.map((zodiac) => {
             const isSelected = zodiac.id === selected.id;
 
             return (
@@ -158,7 +161,7 @@ export default async function Home({ searchParams }: HomeProps) {
 
       <section className="mt-6 rounded-[30px] bg-[#fff7fb] p-5 shadow-card">
         <p className="text-sm font-black text-pink-400">오늘의 조언</p>
-        <p className="mt-2 text-lg font-bold leading-relaxed text-[#45385f]">{todayFortune.advice}</p>
+        <p className="mt-2 text-lg font-bold leading-relaxed text-[#45385f]">{today.advice}</p>
       </section>
 
       <div className="mt-6">
@@ -195,7 +198,7 @@ export default async function Home({ searchParams }: HomeProps) {
       <section className="mt-7">
         <h2 className="text-2xl font-black text-[#2d2541]">제휴 서비스</h2>
         <div className="mt-4 grid gap-3">
-          {todayFortune.affiliateCards.map((card) => (
+          {today.affiliateCards.map((card) => (
             <Link key={card.title} href="/contact" className="flex items-center justify-between rounded-[26px] bg-white p-4 shadow-card">
               <div>
                 <span className="rounded-full bg-pink-100 px-3 py-1 text-xs font-black text-pink-500">
