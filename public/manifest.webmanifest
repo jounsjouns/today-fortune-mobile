@@ -1,0 +1,41 @@
+{
+  "name": "오늘의 운세",
+  "short_name": "오늘운세",
+  "description": "매일 아침 확인하는 모바일 오늘의 운세",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fbf8ff",
+  "theme_color": "#d3bdff",
+  "orientation": "portrait",
+  "lang": "ko",
+  "categories": ["lifestyle", "entertainment"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "띠별 운세",
+      "short_name": "띠별",
+      "url": "/#zodiac",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "구독하기",
+      "short_name": "구독",
+      "url": "/#subscribe",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
