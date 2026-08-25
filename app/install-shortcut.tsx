@@ -36,14 +36,23 @@ export default function InstallShortcut() {
       setGuide(["Safari 하단 공유 버튼을 누르세요.", "'홈 화면에 추가'를 선택하세요.", "오른쪽 위 '추가'를 누르면 바탕화면에 아이콘이 생깁니다."]);
     } else if (isAndroid) {
       setMessage("Android는 브라우저에 따라 바로가기 창이 뜨거나 메뉴 추가가 필요해요.");
-      setGuide(["홈화면 바로가기 만들기 버튼을 먼저 눌러보세요.", "창이 안 뜨면 Chrome 오른쪽 위 점 3개를 누르세요.", "'홈 화면에 추가'를 선택하면 바탕화면에 아이콘이 생깁니다."]);
+      setGuide([
+        "크롬 주소창에 사이트 주소를 붙여넣고 접속하세요.",
+        "앱 설치 화면이 뜨면 설치를 누르세요.",
+        "'안전하지 않은 앱 차단됨'이 뜨면 세부정보 더보기를 누르세요.",
+        "무시하고 설치하기를 누르면 홈화면에 아이콘이 생깁니다."
+      ]);
     }
 
     const handleBeforeInstallPrompt = (event: Event) => {
       event.preventDefault();
       setInstallPrompt(event as BeforeInstallPromptEvent);
       setMessage("버튼을 누르면 홈화면 바로가기 창이 열립니다.");
-      setGuide(["아래 버튼을 누르세요.", "확인 창에서 추가 또는 설치를 선택하면 아이콘이 생성됩니다."]);
+      setGuide([
+        "아래 버튼을 누르세요.",
+        "확인 창에서 설치를 선택하면 아이콘이 생성됩니다.",
+        "'안전하지 않은 앱 차단됨'이 뜨면 세부정보 더보기 → 무시하고 설치하기를 선택하세요."
+      ]);
     };
 
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
