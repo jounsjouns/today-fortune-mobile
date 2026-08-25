@@ -1,4 +1,4 @@
-const CACHE_NAME = "today-fortune-v6";
+const CACHE_NAME = "today-fortune-v7";
 const APP_SHELL = [
   "/",
   "/offline",

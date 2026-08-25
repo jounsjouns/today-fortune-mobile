@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 const navItems = [
   { href: "/", label: "오늘", icon: "✨" },
   { href: "#zodiac", label: "띠별", icon: "🧭" },
-  { href: "#install", label: "설치", icon: "📱" },
+  { href: "#install", label: "바로가기", icon: "📱" },
   { href: "/contact", label: "문의", icon: "☎️" }
 ];
 
