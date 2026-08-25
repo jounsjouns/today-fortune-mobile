@@ -13,6 +13,7 @@ export default function InstallShortcut() {
   const [copyMessage, setCopyMessage] = useState("");
   const [guide, setGuide] = useState<string[]>([
     "홈화면 바로가기 만들기 버튼을 눌러보세요.",
+    "설치가 안 될 경우 크롬창에서 주소를 붙여넣고 실행한 후 다시 눌러주세요.",
     "아이콘이 안 보이면 브라우저 메뉴에서 홈 화면에 추가를 선택하세요."
   ]);
   const [isInstalled, setIsInstalled] = useState(false);
@@ -33,10 +34,16 @@ export default function InstallShortcut() {
       setGuide(["홈화면 아이콘으로 실행된 상태입니다.", "다음부터는 휴대폰 바탕화면의 오늘운세 아이콘을 누르면 됩니다."]);
     } else if (isIos) {
       setMessage("iPhone은 버튼으로 홈화면 아이콘을 직접 만들 수 없어요.");
-      setGuide(["Safari 하단 공유 버튼을 누르세요.", "'홈 화면에 추가'를 선택하세요.", "오른쪽 위 '추가'를 누르면 바탕화면에 아이콘이 생깁니다."]);
+      setGuide([
+        "설치가 안 될 경우 크롬창에서 주소를 붙여넣고 실행한 후 다시 눌러주세요.",
+        "Safari 하단 공유 버튼을 누르세요.",
+        "'홈 화면에 추가'를 선택하세요.",
+        "오른쪽 위 '추가'를 누르면 바탕화면에 아이콘이 생깁니다."
+      ]);
     } else if (isAndroid) {
       setMessage("Android는 브라우저에 따라 바로가기 창이 뜨거나 메뉴 추가가 필요해요.");
       setGuide([
+        "설치가 안 될 경우 크롬창에서 주소를 붙여넣고 실행한 후 다시 눌러주세요.",
         "크롬 주소창에 사이트 주소를 붙여넣고 접속하세요.",
         "앱 설치 화면이 뜨면 설치를 누르세요.",
         "'안전하지 않은 앱 차단됨'이 뜨면 세부정보 더보기를 누르세요.",
@@ -50,6 +57,7 @@ export default function InstallShortcut() {
       setMessage("버튼을 누르면 홈화면 바로가기 창이 열립니다.");
       setGuide([
         "아래 버튼을 누르세요.",
+        "설치가 안 될 경우 크롬창에서 주소를 붙여넣고 실행한 후 다시 눌러주세요.",
         "확인 창에서 설치를 선택하면 아이콘이 생성됩니다.",
         "'안전하지 않은 앱 차단됨'이 뜨면 세부정보 더보기 → 무시하고 설치하기를 선택하세요."
       ]);
