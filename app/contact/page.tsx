@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CopyEmailButton from "./copy-email-button";
 
 export default function ContactPage() {
   return (
@@ -16,6 +17,7 @@ export default function ContactPage() {
         >
           jounsjouns@naver.com
         </a>
+        <CopyEmailButton />
       </section>
     </main>
   );
