@@ -18,6 +18,33 @@ export type DailyFortune = typeof todayFortune & {
   dateKey: string;
 };
 
+export const coupangProducts = [
+  {
+    id: "tripod",
+    name: "스마트폰 삼각대",
+    image: "/affiliate/tripod.jpg",
+    affiliateUrl: "https://link.coupang.com/a/glnrsbSFfE"
+  },
+  {
+    id: "ring-light",
+    name: "유튜브 링라이트",
+    image: "/affiliate/ring-light.jpg",
+    affiliateUrl: "https://link.coupang.com/a/glnwIyNycC"
+  },
+  {
+    id: "microphone",
+    name: "유튜브 마이크",
+    image: "/affiliate/microphone.jpg",
+    affiliateUrl: "https://link.coupang.com/a/glnzh0xtfw"
+  },
+  {
+    id: "creator-kit",
+    name: "유튜브 촬영 세트",
+    image: "/affiliate/creator-kit.jpg",
+    affiliateUrl: "https://link.coupang.com/a/glowBs0JdA"
+  }
+];
+
 export const todayFortune = {
   dateLabel: "오늘 아침",
   headline: "천천히 시작해도 좋은 흐름은 당신 편이에요.",
@@ -28,18 +55,6 @@ export const todayFortune = {
     { label: "금전운", score: 74, icon: "💰" },
     { label: "직장운", score: 88, icon: "💼" },
     { label: "행운지수", score: 91, icon: "✨" }
-  ],
-  affiliateCards: [
-    {
-      title: "사주 리포트",
-      description: "태어난 시간까지 반영한 상세 흐름",
-      badge: "추천"
-    },
-    {
-      title: "타로 상담",
-      description: "연애와 선택의 고민을 빠르게 확인",
-      badge: "제휴"
-    }
   ]
 };
 

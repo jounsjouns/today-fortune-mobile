@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getDailyFortune } from "@/data/fortune";
+import { coupangProducts, getDailyFortune } from "@/data/fortune";
 
 export const dynamic = "force-dynamic";
 
@@ -196,21 +196,43 @@ export default async function Home({ searchParams }: HomeProps) {
       </section>
 
       <section className="mt-7">
-        <h2 className="text-2xl font-black text-[#2d2541]">제휴 서비스</h2>
-        <div className="mt-4 grid gap-3">
-          {today.affiliateCards.map((card) => (
-            <Link key={card.title} href="/contact" className="flex items-center justify-between rounded-[26px] bg-white p-4 shadow-card">
-              <div>
-                <span className="rounded-full bg-pink-100 px-3 py-1 text-xs font-black text-pink-500">
-                  {card.badge}
-                </span>
-                <h3 className="mt-3 text-lg font-black text-[#2d2541]">{card.title}</h3>
-                <p className="mt-1 text-sm text-[#7b708c]">{card.description}</p>
+        <div className="flex items-end justify-between gap-3">
+          <div>
+            <p className="text-sm font-black text-lavender-500">추천 광고</p>
+            <h2 className="mt-1 text-2xl font-black text-[#2d2541]">영상 제작 아이템</h2>
+          </div>
+          <span className="rounded-full bg-white px-3 py-1 text-xs font-black text-pink-500 shadow-card">
+            Coupang
+          </span>
+        </div>
+        <div className="mt-4 grid grid-cols-2 gap-3">
+          {coupangProducts.map((product) => (
+            <a
+              key={product.id}
+              href={product.affiliateUrl}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="overflow-hidden rounded-[24px] bg-white shadow-card transition hover:-translate-y-0.5 hover:shadow-soft"
+            >
+              <div className="aspect-square bg-lavender-100">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="h-full w-full object-cover"
+                />
               </div>
-              <span className="grid size-11 place-items-center rounded-full bg-lavender-100 text-xl">›</span>
-            </Link>
+              <div className="p-3">
+                <p className="line-clamp-2 min-h-10 text-sm font-black leading-5 text-[#2d2541]">
+                  {product.name}
+                </p>
+                <p className="mt-2 text-xs font-bold text-lavender-500">자세히 보기</p>
+              </div>
+            </a>
           ))}
         </div>
+        <p className="mt-3 rounded-[18px] bg-white/70 p-3 text-[11px] font-medium leading-5 text-[#7b708c] shadow-card">
+          이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
+        </p>
       </section>
 
       <footer className="mt-8 flex justify-center gap-4 text-xs font-bold text-[#7e7192]">
