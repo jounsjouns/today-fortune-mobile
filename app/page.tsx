@@ -10,38 +10,10 @@ const navItems = [
   { href: "/contact", label: "문의", icon: "☎️" }
 ];
 
-function AdBox({ label }: { label: string }) {
-  return (
-    <section className="rounded-[28px] border border-dashed border-lavender-300 bg-white/64 p-5 text-center shadow-card">
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-lavender-500">AD</p>
-      <p className="mt-2 text-sm font-medium text-[#6d617f]">{label}</p>
-    </section>
-  );
-}
-
-function ScoreRing({ label, score, icon }: { label: string; score: number; icon: string }) {
-  return (
-    <article className="rounded-[26px] bg-white p-4 shadow-card">
-      <div className="flex items-center justify-between">
-        <span className="text-2xl" aria-hidden>
-          {icon}
-        </span>
-        <span className="text-lg font-black text-lavender-600">{score}</span>
-      </div>
-      <div className="mt-4 h-2 rounded-full bg-lavender-100">
-        <div
-          className="h-2 rounded-full bg-gradient-to-r from-lavender-400 to-pink-300"
-          style={{ width: `${score}%` }}
-        />
-      </div>
-      <p className="mt-3 text-sm font-bold text-[#45385f]">{label}</p>
-    </article>
-  );
-}
-
 type HomeProps = {
   searchParams?: Promise<{
     zodiac?: string;
+    topic?: string;
   }>;
 };
 
@@ -50,47 +22,28 @@ export default async function Home({ searchParams }: HomeProps) {
   const { today, zodiacs } = getDailyFortune();
   const selectedId = params?.zodiac ?? zodiacs[0].id;
   const selected = zodiacs.find((zodiac) => zodiac.id === selectedId) ?? zodiacs[0];
+  const selectedTopicId = params?.topic;
+  const selectedTopic = today.topics.find((topic) => topic.id === selectedTopicId);
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-[430px] bg-lavender-50/80 px-5 pb-28 pt-5 shadow-soft sm:my-8 sm:rounded-[36px]">
-      <header className="rounded-[32px] bg-gradient-to-br from-lavender-300 via-purple-200 to-pink-100 p-6 shadow-soft">
+      <header className="rounded-[28px] bg-gradient-to-br from-lavender-300 via-purple-200 to-pink-100 p-5 shadow-soft">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm font-bold text-lavender-600">{today.dateLabel}</p>
-            <h1 className="mt-2 text-4xl font-black leading-tight text-[#2d2541]">
+            <h1 className="mt-2 text-3xl font-black leading-tight text-[#2d2541]">
               오늘의
               <br />
               운세
             </h1>
           </div>
-          <div className="grid size-16 place-items-center rounded-full bg-white/72 text-4xl shadow-card">
+          <div className="grid size-14 place-items-center rounded-full bg-white/72 text-3xl shadow-card">
             🌙
           </div>
         </div>
-        <p className="mt-6 rounded-[24px] bg-white/70 p-4 text-lg font-bold leading-relaxed text-[#493a63]">
-          {today.headline}
-        </p>
       </header>
 
-      <div className="mt-5">
-        <AdBox label="상단 광고 영역 placeholder" />
-      </div>
-
-      <section className="mt-7">
-        <div className="flex items-end justify-between">
-          <h2 className="text-2xl font-black text-[#2d2541]">오늘의 점수</h2>
-          <span className="rounded-full bg-white px-3 py-1 text-xs font-bold text-lavender-600 shadow-card">
-            매일 업데이트
-          </span>
-        </div>
-        <div className="mt-4 grid grid-cols-2 gap-3">
-          {today.scores.map((score) => (
-            <ScoreRing key={score.label} {...score} />
-          ))}
-        </div>
-      </section>
-
-      <section id="zodiac" className="mt-8">
+      <section id="zodiac" className="mt-7">
         <h2 className="text-2xl font-black text-[#2d2541]">12띠별 운세</h2>
         <div className="mt-4 grid grid-cols-3 gap-3">
           {zodiacs.map((zodiac) => {
@@ -99,7 +52,7 @@ export default async function Home({ searchParams }: HomeProps) {
             return (
               <Link
                 key={zodiac.id}
-                href={`/?zodiac=${zodiac.id}#zodiac`}
+                href={`/?zodiac=${zodiac.id}${selectedTopicId ? `&topic=${selectedTopicId}` : ""}#zodiac`}
                 aria-label={`${zodiac.animal} 운세 보기`}
                 data-testid={`zodiac-${zodiac.id}`}
                 className={`min-h-24 rounded-[24px] px-3 py-3 text-center shadow-card transition ${
@@ -164,9 +117,47 @@ export default async function Home({ searchParams }: HomeProps) {
         <p className="mt-2 text-lg font-bold leading-relaxed text-[#45385f]">{today.advice}</p>
       </section>
 
-      <div className="mt-6">
-        <AdBox label="중간 광고 영역 placeholder" />
-      </div>
+      <section id="topic" className="mt-6 rounded-[30px] bg-white p-5 shadow-soft">
+        <p className="text-sm font-black text-lavender-500">상세 운세</p>
+        <h2 className="mt-1 text-2xl font-black text-[#2d2541]">궁금한 운세를 골라보세요</h2>
+        <div className="mt-4 grid grid-cols-3 gap-2">
+          {today.topics.map((topic) => {
+            const isSelected = topic.id === selectedTopic?.id;
+
+            return (
+              <Link
+                key={topic.id}
+                href={`/?zodiac=${selected.id}&topic=${topic.id}#topic`}
+                className={`rounded-[22px] px-2 py-4 text-center shadow-card transition ${
+                  isSelected
+                    ? "bg-lavender-500 text-white"
+                    : "bg-lavender-50 text-[#4c4262]"
+                }`}
+              >
+                <span className="block text-2xl" aria-hidden>
+                  {topic.icon}
+                </span>
+                <span className="mt-2 block text-sm font-black">{topic.label}</span>
+              </Link>
+            );
+          })}
+        </div>
+        {selectedTopic ? (
+          <article className="mt-4 rounded-[24px] bg-lavender-50 p-4">
+            <p className="text-sm font-black text-lavender-600">
+              {selectedTopic.icon} {selectedTopic.label}
+            </p>
+            <h3 className="mt-2 text-xl font-black leading-snug text-[#2d2541]">
+              {selectedTopic.summary}
+            </h3>
+            <p className="mt-3 text-[15px] leading-7 text-[#6d617f]">{selectedTopic.detail}</p>
+          </article>
+        ) : (
+          <p className="mt-4 rounded-[22px] bg-lavender-50 p-4 text-sm font-bold leading-6 text-[#6d617f]">
+            연애운, 금전운, 직장운 중 하나를 누르면 오늘의 상세 운세가 열립니다.
+          </p>
+        )}
+      </section>
 
       <section id="subscribe" className="mt-6 rounded-[30px] bg-white p-5 shadow-soft">
         <p className="text-sm font-black text-lavender-500">아침 운세 구독</p>

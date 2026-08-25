@@ -45,6 +45,60 @@ export const coupangProducts = [
   }
 ];
 
+export const fortuneTopics = [
+  {
+    id: "love",
+    label: "연애운",
+    icon: "💕",
+    summaries: [
+      "마음을 부드럽게 표현하면 관계가 가까워져요.",
+      "기다리던 답보다 먼저 따뜻한 말을 건네보세요.",
+      "작은 배려가 오늘의 설렘을 만들어줍니다.",
+      "솔직함과 여유가 좋은 분위기를 부릅니다."
+    ],
+    details: [
+      "상대의 반응을 급하게 해석하지 말고 흐름을 지켜보세요. 편안한 대화와 짧은 안부가 관계운을 자연스럽게 올립니다.",
+      "오늘은 큰 고백보다 일상적인 관심이 더 잘 통합니다. 오래된 관계라면 익숙함 속에서 놓친 고마움을 표현해보세요.",
+      "새로운 만남에는 천천히 다가가는 태도가 좋습니다. 마음에 드는 사람이 있다면 부담 없는 질문으로 시작해보세요.",
+      "서운한 일이 있었다면 공격적인 말보다 구체적인 마음을 전하는 편이 좋습니다. 부드러운 표현이 오해를 풀어줍니다."
+    ]
+  },
+  {
+    id: "money",
+    label: "금전운",
+    icon: "💰",
+    summaries: [
+      "소비를 정리하면 돈의 흐름이 안정돼요.",
+      "작은 절약이 예상보다 큰 만족으로 돌아옵니다.",
+      "충동구매보다 필요한 투자에 운이 따릅니다.",
+      "돈과 관련된 약속은 기록해두면 좋습니다."
+    ],
+    details: [
+      "오늘은 큰 결정보다 지출 내역을 점검하기 좋은 날입니다. 자동결제, 구독, 장바구니를 정리하면 새는 돈을 막을 수 있어요.",
+      "할인이나 제안이 좋아 보여도 바로 결제하지 말고 한 번 더 비교하세요. 기다림이 더 좋은 조건을 데려올 수 있습니다.",
+      "수입을 늘리는 아이디어가 떠오를 수 있습니다. 다만 무리한 투자보다 작게 테스트하는 방식이 오늘의 운에 맞습니다.",
+      "돈을 빌리거나 빌려주는 일은 신중하게 접근하세요. 금액과 날짜를 분명히 적어두면 불필요한 오해를 줄일 수 있습니다."
+    ]
+  },
+  {
+    id: "work",
+    label: "직장운",
+    icon: "💼",
+    summaries: [
+      "정리된 말과 빠른 실행이 좋은 평가를 불러요.",
+      "미뤄둔 업무를 끝내기 좋은 흐름입니다.",
+      "협업에서 당신의 꼼꼼함이 빛납니다.",
+      "오늘은 속도보다 완성도가 중요합니다."
+    ],
+    details: [
+      "회의나 메시지에서는 핵심을 짧게 정리해보세요. 해야 할 일, 마감, 담당자를 분명히 하면 주변의 신뢰가 올라갑니다.",
+      "오래 끌던 일을 하나만 끝내도 하루의 분위기가 달라집니다. 작은 완료감이 다음 업무까지 가볍게 밀어줍니다.",
+      "동료의 요청을 모두 떠안기보다 우선순위를 나누는 것이 좋습니다. 친절하되 경계를 세우면 성과가 더 좋아집니다.",
+      "새로운 제안이 들어오면 당장 답하기보다 자료를 확인하세요. 숫자와 근거를 챙긴 답변이 더 좋은 인상을 남깁니다."
+    ]
+  }
+];
+
 export const todayFortune = {
   dateLabel: "오늘 아침",
   headline: "천천히 시작해도 좋은 흐름은 당신 편이에요.",
@@ -307,6 +361,17 @@ export function getDailyFortune(date = new Date()) {
       }
     };
   });
+  const topics = fortuneTopics.map((topic, index) => {
+    const topicSeed = hashText(`${dateKey}-${topic.id}`);
+
+    return {
+      id: topic.id,
+      label: topic.label,
+      icon: topic.icon,
+      summary: pickBySeed(topic.summaries, topicSeed, index),
+      detail: pickBySeed(topic.details, topicSeed, index + 2)
+    };
+  });
 
   return {
     today: {
@@ -315,6 +380,7 @@ export function getDailyFortune(date = new Date()) {
       headline: pickBySeed(dailyHeadlines, seed),
       advice: pickBySeed(dailyAdvice, seed, 3),
       scores,
+      topics,
       dateKey
     },
     zodiacs
