@@ -130,9 +130,9 @@ export default function InstallShortcut() {
           {copyMessage}
         </p>
       ) : null}
-      <div className="mt-4 rounded-[22px] bg-lavender-50 p-4">
-        <p className="text-xs font-black text-lavender-500">홈화면에 아이콘이 안 보일 때</p>
-        <ol className="mt-2 space-y-2 text-sm font-bold leading-6 text-[#6d617f]">
+      <div className="mt-4 rounded-[20px] bg-lavender-50 p-3">
+        <p className="text-[11px] font-black text-lavender-500">홈화면에 아이콘이 안 보일 때</p>
+        <ol className="mt-2 space-y-1 text-xs font-bold leading-5 text-[#6d617f]">
           {guide.map((step) => (
             <li key={step}>{step}</li>
           ))}
