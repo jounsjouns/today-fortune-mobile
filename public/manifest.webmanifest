@@ -32,9 +32,9 @@
       "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
     },
     {
-      "name": "구독하기",
-      "short_name": "구독",
-      "url": "/#subscribe",
+      "name": "바로가기 생성",
+      "short_name": "설치",
+      "url": "/#install",
       "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
     }
   ]

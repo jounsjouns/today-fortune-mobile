@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { coupangProducts, getDailyFortune } from "@/data/fortune";
+import InstallShortcut from "./install-shortcut";
 
 export const dynamic = "force-dynamic";
 
 const navItems = [
   { href: "/", label: "오늘", icon: "✨" },
   { href: "#zodiac", label: "띠별", icon: "🧭" },
-  { href: "#subscribe", label: "구독", icon: "💌" },
+  { href: "#install", label: "설치", icon: "📱" },
   { href: "/contact", label: "문의", icon: "☎️" }
 ];
 
@@ -151,6 +152,26 @@ export default async function Home({ searchParams }: HomeProps) {
               {selectedTopic.summary}
             </h3>
             <p className="mt-3 text-[15px] leading-7 text-[#6d617f]">{selectedTopic.detail}</p>
+            <div className="mt-4 grid gap-3">
+              <div className="rounded-[20px] bg-white p-4">
+                <p className="text-xs font-black text-lavender-500">좋은 흐름</p>
+                <p className="mt-2 text-sm font-bold leading-6 text-[#4b3b68]">
+                  {selectedTopic.good}
+                </p>
+              </div>
+              <div className="rounded-[20px] bg-white p-4">
+                <p className="text-xs font-black text-pink-400">조심할 점</p>
+                <p className="mt-2 text-sm font-bold leading-6 text-[#4b3b68]">
+                  {selectedTopic.caution}
+                </p>
+              </div>
+              <div className="rounded-[20px] bg-white p-4">
+                <p className="text-xs font-black text-lavender-500">오늘의 행동</p>
+                <p className="mt-2 text-sm font-bold leading-6 text-[#4b3b68]">
+                  {selectedTopic.action}
+                </p>
+              </div>
+            </div>
           </article>
         ) : (
           <p className="mt-4 rounded-[22px] bg-lavender-50 p-4 text-sm font-bold leading-6 text-[#6d617f]">
@@ -159,32 +180,7 @@ export default async function Home({ searchParams }: HomeProps) {
         )}
       </section>
 
-      <section id="subscribe" className="mt-6 rounded-[30px] bg-white p-5 shadow-soft">
-        <p className="text-sm font-black text-lavender-500">아침 운세 구독</p>
-        <h2 className="mt-2 text-2xl font-black text-[#2d2541]">내일도 잊지 않게 받아보세요</h2>
-        <form action="/contact" className="mt-4 flex gap-2">
-          <input
-            type="email"
-            name="email"
-            placeholder="email@example.com"
-            className="min-w-0 flex-1 rounded-2xl border border-lavender-100 bg-lavender-50 px-4 py-3 text-sm outline-none focus:border-lavender-400"
-          />
-          <button className="rounded-2xl bg-lavender-500 px-4 py-3 text-sm font-black text-white shadow-card">
-            구독
-          </button>
-        </form>
-      </section>
-
-      <section className="mt-6 rounded-[30px] bg-gradient-to-br from-[#4b3b68] to-lavender-600 p-5 text-white shadow-soft">
-        <p className="text-sm font-bold text-lavender-100">Premium</p>
-        <h2 className="mt-2 text-2xl font-black">프리미엄 운세 보기</h2>
-        <p className="mt-2 text-sm leading-6 text-lavender-100">
-          월간 흐름, 궁합, 재물운 리포트를 한 번에 확인하세요.
-        </p>
-        <Link href="/contact" className="mt-5 block w-full rounded-2xl bg-white px-5 py-4 text-center font-black text-lavender-600 shadow-card">
-          🔮 자세히 보기
-        </Link>
-      </section>
+      <InstallShortcut />
 
       <section className="mt-7">
         <div className="flex items-end justify-between gap-3">
