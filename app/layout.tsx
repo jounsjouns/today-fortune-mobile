@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
+import GoogleAnalytics from "./google-analytics";
 import PwaRegister from "./pwa-register";
 import "./globals.css";
 
@@ -38,6 +39,7 @@ export default function RootLayout({
       <body>
         {children}
         <Analytics />
+        <GoogleAnalytics />
         <PwaRegister />
       </body>
     </html>
