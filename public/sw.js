@@ -1,4 +1,4 @@
-const CACHE_NAME = "today-fortune-v2";
+const CACHE_NAME = "today-fortune-v3";
 const APP_SHELL = [
   "/",
   "/offline",
@@ -8,7 +8,11 @@ const APP_SHELL = [
   "/manifest.webmanifest",
   "/icons/icon-192.png",
   "/icons/icon-512.png",
-  "/icons/apple-touch-icon.png"
+  "/icons/apple-touch-icon.png",
+  "/affiliate/tripod.jpg",
+  "/affiliate/ring-light.jpg",
+  "/affiliate/microphone.jpg",
+  "/affiliate/creator-kit.jpg"
 ];
 
 self.addEventListener("install", (event) => {
