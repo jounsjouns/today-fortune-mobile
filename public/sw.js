@@ -1,4 +1,4 @@
-const CACHE_NAME = "today-fortune-v11";
+const CACHE_NAME = "today-fortune-v12";
 const APP_SHELL = [
   "/",
   "/offline",
@@ -6,9 +6,9 @@ const APP_SHELL = [
   "/terms",
   "/contact",
   "/manifest.webmanifest",
-  "/icons/icon-192.png",
-  "/icons/icon-512.png",
-  "/icons/apple-touch-icon.png",
+  "/icons/fortune-icon-192.png",
+  "/icons/fortune-icon-512.png",
+  "/icons/fortune-apple-touch-icon.png",
   "/affiliate/tripod.jpg",
   "/affiliate/ring-light.jpg",
   "/affiliate/microphone.jpg",
